@@ -18,24 +18,16 @@ services:
     links:
       - selenium-hub
 
-  bdd-testng:
-    image: nitinmanojkumar/selenium-docker-bdd-testng
+  bdd-testng-parallel:
+    image: nitinmanojkumar/selenium-docker-bdd-testng-parallel
     depends_on:
       - "chrome"
     environment:
       - BROWSER=chrome
       - SE_EVENT_BUS_HOST=selenium-hub
-      - CUCUMBER_OPTIONS=classpath:features --tags @Webdriver
+      - CUCUMBER_OPTIONS=classpath:features
     volumes:
       - ./output/testng:/usr/share/udemy/target/cucumber-reports
+      - ./output/test-output-thread:/usr/share/udemy/test-output-thread
+      - ./output/test-output:/usr/share/udemy/test-output
   
-  bdd-junit:
-    image: nitinmanojkumar/selenium-docker-bdd-junit
-    depends_on:
-      - "chrome"
-    environment:
-      - BROWSER=chrome
-      - SE_EVENT_BUS_HOST=selenium-hub
-      - CUCUMBER_OPTIONS=classpath:features --tags @Webdriver
-    volumes:
-      - ./output/junit:/usr/share/udemy/target/cucumber-reports

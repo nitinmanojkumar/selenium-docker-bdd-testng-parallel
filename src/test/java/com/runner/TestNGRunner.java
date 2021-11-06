@@ -13,7 +13,7 @@ import io.cucumber.testng.CucumberOptions;
         "html:target/cucumber-reports/cucumber-report.html",
         "json:target/cucumber-reports/Cucumber.json",
         "junit:target/cucumber-reports/Cucumber.xml",
-        "rerun:target/rerun.txt"})
+        "rerun:target/rerunfailed.txt"})
 
 public class TestNGRunner extends AbstractTestNGCucumberTests{
 	

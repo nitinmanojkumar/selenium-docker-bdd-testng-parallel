@@ -21,6 +21,7 @@ import java.net.URL;
 
 public class SearchSteps extends BaseClass{
 
+	
 	private BaseClass base;
 
 	public SearchSteps(BaseClass base) {
@@ -36,11 +37,15 @@ public class SearchSteps extends BaseClass{
     	        Thread.currentThread().getId());
         searchPage = new SearchPage(base.driver);
         searchPage.goTo();
+        	
     }
+    
 
     @And("^I enter the \"([^\"]*)\" to search$")
     public void enterKeyword(String keyword) {
         searchPage.doSearch(keyword);
+        int random_int=(int)Math.floor(Math.random()*(2-1+1)+1);
+        Assert.assertEquals(keyword, "test"+random_int);
     }
 
     @And("^I navigate to videos search$")
@@ -54,31 +59,5 @@ public class SearchSteps extends BaseClass{
         //Assert.assertTrue(size > min);
     }
 
-    /*@Before
-    public void setupDriver() throws MalformedURLException {
-        // BROWSER => chrome / firefox
-        // HUB_HOST => localhost / 10.0.1.3 / hostname
-        String host = "localhost";
-        DesiredCapabilities dc;
-
-        if(System.getProperty("BROWSER") != null &&
-                System.getProperty("BROWSER").equalsIgnoreCase("firefox")){
-            dc = DesiredCapabilities.firefox();
-        }else{
-            dc = DesiredCapabilities.chrome();
-        }
-
-        if(System.getProperty("SE_EVENT_BUS_HOST") != null){
-            host = System.getProperty("SE_EVENT_BUS_HOST");
-        }
-
-        String completeUrl = "http://" + host + ":4444/wd/hub";
-        this.driver = new RemoteWebDriver(new URL(completeUrl), dc);
-    }
-
-   @After
-    public void quitDriver(){
-        this.driver.quit();
-    }*/
 
 }

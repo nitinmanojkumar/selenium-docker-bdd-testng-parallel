@@ -53,9 +53,9 @@ public class Hook extends BaseClass {
 	        }
 
 	        String completeUrl = "http://" + host + ":4444/wd/hub";
-	        //System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"//drivers//chromedriver.exe");
-	        //base.driver =new ChromeDriver();
-	        base.driver = new RemoteWebDriver(new URL(completeUrl), dc);
+	        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"//drivers//chromedriver.exe");
+	        base.driver =new ChromeDriver();
+	        //base.driver = new RemoteWebDriver(new URL(completeUrl), dc);
 	    }
 
 	   @After

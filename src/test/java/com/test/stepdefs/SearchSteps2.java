@@ -3,34 +3,61 @@ package com.test.stepdefs;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.junit.Assert;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.searchmodule.pages.SearchPage;
+
+import baseAndHooks.BaseClass;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class SearchSteps2 {
+public class SearchSteps2 extends BaseClass{
 
-	@Given("^I want to write a step with name(\\d+)$")
-	public void i_want_to_write_a_step_with_name(int arg1) throws Throwable {
-		System.out.println("Its given 1 "+arg1);
-	}
+	private BaseClass base;
 
-	@When("^I check for the (\\d+) in step$")
-	public void i_check_for_the_in_step(int arg1) throws Throwable {
-		System.out.println("Its when 1 "+arg1);
+	public SearchSteps2(BaseClass base) {
+		System.out.println("SearchSteps2 args constructor");
+		this.base = base;
 	}
+	
+    private SearchPage searchPage;
 
-	@Then("^I verify the success in step$")
-	public void i_verify_the_success_in_step() throws Throwable {
-		System.out.println("Its then 1");
-	}
+    @Given("^I ama on the website duck-duck-go$")
+    public void launchSite() {
+    	System.out.format("Thread ID - %2d -  feature file.\n",
+    	        Thread.currentThread().getId());
+        searchPage = new SearchPage(base.driver);
+        searchPage.goTo();
+        	
+    }
+    
+    
+    public static void main(String[]args) {
+    	int random_int=(int)Math.floor(Math.random()*(2-1+1)+1);
+    	System.out.println(random_int);
+    }
 
-	@Then("^I verify the Fail in step$")
-	public void i_verify_the_Fail_in_step() throws Throwable {
-		System.out.println("Its then 2");
-	}
+    @And("^I entera the \"([^\"]*)\" to search$")
+    public void enterKeyword(String keyword) {
+        searchPage.doSearch(keyword);
+        int random_int=(int)Math.floor(Math.random()*(2-1+1)+1);
+        Assert.assertEquals(keyword, "docker"+random_int);
+    }
+
+    @And("^I navigatea to videos search$")
+    public void navigateTovideos()  {
+        searchPage.goToVideos();
+    }
+
+    @Then("^I shoulda get minimum (\\d+) search results$")
+    public void verifySearchResults(int min) {
+        int size = searchPage.getResult();
+        //Assert.assertTrue(size > min);
+    }
 
 
 }

@@ -5,16 +5,16 @@ import org.testng.annotations.DataProvider;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
-@CucumberOptions(features = "@target/rerunfailed.txt", 
+@CucumberOptions(features = "@test-output/rerunfailed.txt", 
 		glue = { "com.test.stepdefs","AppHooks" }, 
 		monochrome = true, 
-		plugin = { "pretty",
-				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:", 
-				"timeline:test-output-thread/",
-				"html:target/cucumber-reports/failed-rerun-cucumber-report.html", 
-				"json:target/cucumber-reports/failed-rerun-Cucumber.json",
-				"junit:target/cucumber-reports/failed-rerun-Cucumber.xml", 
-				"rerun:target/rerunfailed.txt" })
+		plugin = {"pretty",
+		        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
+		        "timeline:test-output/test-output-thread-rerun/",
+		        "html:test-output/cucumber-reports/rerun-cucumber-report.html",
+		        "json:test-output/cucumber-reports/rerun-Cucumber.json",
+		        "junit:test-output/cucumber-reports/rerun-Cucumber.xml",
+		        "rerun:test-output/re-rerunfailed.txt"})
 
 
 public class ReRun_TestNGRunner extends AbstractTestNGCucumberTests {

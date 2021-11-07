@@ -30,4 +30,5 @@ services:
       - ./output/testng:/usr/share/udemy/target/cucumber-reports
       - ./output/test-output-thread:/usr/share/udemy/test-output-thread
       - ./output/test-output:/usr/share/udemy/test-output
+      - ./output/test-output/surefire-reports:/usr/share/udemy/target/surefire-reports
   

@@ -9,11 +9,11 @@ import io.cucumber.testng.CucumberOptions;
 		monochrome = true,
  		plugin = {"pretty",
         "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
-        "timeline:test-output-thread/",
-        "html:target/cucumber-reports/cucumber-report.html",
-        "json:target/cucumber-reports/Cucumber.json",
-        "junit:target/cucumber-reports/Cucumber.xml",
-        "rerun:target/rerunfailed.txt"})
+        "timeline:test-output/test-output-thread-normal/",
+        "html:test-output/cucumber-reports/cucumber-report.html",
+        "json:test-output/cucumber-reports/Cucumber.json",
+        "junit:test-output/cucumber-reports/Cucumber.xml",
+        "rerun:test-output/rerunfailed.txt"})
 
 public class TestNGRunner extends AbstractTestNGCucumberTests{
 	

@@ -1,1 +1,1 @@
-docker-compose -f docker-compose-local.yml up --scale chrome=1
+docker-compose -f docker-compose-local.yml up -d --scale chrome=4

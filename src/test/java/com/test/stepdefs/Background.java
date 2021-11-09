@@ -33,4 +33,11 @@ public class Background {
 	    z=z+1;
 	}
 	
+	
+	@Given("I am testing the keyword {string}")
+	public void i_am_testing_the_keyword(String string) {
+		System.out.println("keyword from feature file is : "+string);;
+	}
+
+	
 }

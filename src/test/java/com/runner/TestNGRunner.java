@@ -7,7 +7,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(features = "src/test/resources/features", glue = { "com.test.stepdefs","AppHooks"  }, 
 		monochrome = true,
-		tags="@DataTables",
+		tags="@DataTables or @Background",
  		plugin = {"pretty",
         "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
         "timeline:test-output/test-output-thread-normal/",

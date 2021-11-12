@@ -1,0 +1,22 @@
+pipeline {
+    agent { label 'DOCKER_NODE' }
+    stages {
+        stage('Checkout and launch Docker Grid infra') {
+            steps {
+                git branch: 'main', url: 'https://github.com/nitinmanojkumar/selenium-docker-bdd-testng-parallel'
+                bat "cd docker_compose_local && start_grid_chrome4.bat"
+            }
+        }
+        stage('Execute tests via mvn and archieve test results') {
+            steps {
+                bat "mvn clean test -DsuiteXmlFile=testng.xml"
+            }
+            post {
+                always{
+			        archiveArtifacts artifacts: 'output/**'
+			        bat "cd docker_compose_local && close_grid.bat"
+		        }
+            }
+        }
+    }
+}

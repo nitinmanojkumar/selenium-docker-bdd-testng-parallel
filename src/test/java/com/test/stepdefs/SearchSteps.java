@@ -45,7 +45,7 @@ public class SearchSteps extends BaseClass{
     public void enterKeyword(String keyword) {
         searchPage.doSearch(keyword);
         int random_int=(int)Math.floor(Math.random()*(2-1+1)+1);
-        Assert.assertEquals(keyword, "test"+random_int);
+        //Assert.assertEquals(keyword, "test"+random_int);
     }
 
     @And("^I navigate to videos search$")

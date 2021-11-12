@@ -10,10 +10,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class SearchPage {
+public class SearchPage extends CommonFunctions{
 
-    private WebDriver driver;
+    //private WebDriver driver;
     private WebDriverWait wait;
+    private CommonFunctions common;
 
     @FindBy(name="q")
     private WebElement searchTxt;
@@ -27,10 +28,14 @@ public class SearchPage {
     @FindBy(className = "tile--vid")
     private List<WebElement> allVideos;
 
+    
+    
     public SearchPage(WebDriver driver){
+    	super(driver);
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 30);
         PageFactory.initElements(driver, this);
+    	common=new CommonFunctions(this.driver);
     }
 
     public void goTo(){
@@ -38,13 +43,15 @@ public class SearchPage {
     }
 
     public void doSearch(String keyword){
-        this.wait.until(ExpectedConditions.visibilityOf(this.searchTxt));
+        //this.wait.until(ExpectedConditions.visibilityOf(this.searchTxt));
+    	common.Explicitwait_Element(this.searchTxt);
         this.searchTxt.sendKeys(keyword);
         this.searchBtn.click();
     }
 
     public void goToVideos(){
-        this.wait.until(ExpectedConditions.visibilityOf(this.videosLink));
+        //this.wait.until(ExpectedConditions.visibilityOf(this.videosLink));
+    	common.Explicitwait_Element(this.videosLink);
         this.videosLink.click();
     }
 

@@ -35,7 +35,7 @@ public class Hook extends BaseClass {
 		this.base = base;
 	}
 
-	@AfterStep
+	@AfterStep("not @ParameterType")
 	public void addScreenshot(Scenario scenario) {
 
 		final byte[] screenshot = ((TakesScreenshot) base.driver).getScreenshotAs(OutputType.BYTES);
@@ -43,21 +43,18 @@ public class Hook extends BaseClass {
 
 	}
 
-	@Before("@Regression and not @Sanity")
+	@Before("@Regression and not @ParameterType")
 	public void conditionalHooks(Scenario scenario) {
 		System.out.println("Hey the scenario is : " + scenario.getName());
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "//drivers//chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 
 		driver.get("https://www.google.com");
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-		/*
-		 * WebDriverWait wait=new WebDriverWait(driver, 10);
-		 * wait.until(ExpectedConditions.presenceOfElementLocated(By.id("hey")));
-		 */
+		
 		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver);
 		wait.pollingEvery(250, TimeUnit.MILLISECONDS);
 		wait.withTimeout(20, TimeUnit.SECONDS);
@@ -75,9 +72,9 @@ public class Hook extends BaseClass {
 
 		wait.until(function);
 
-	}
+	}*/
 
-	@Before
+	@Before("not @ParameterType")
 	public void setupDriver() throws MalformedURLException {
 		// BROWSER => chrome / firefox
 		// HUB_HOST => localhost / 10.0.1.3 / hostname
@@ -97,12 +94,12 @@ public class Hook extends BaseClass {
 		}
 
 		String completeUrl = "http://" + host + ":4444/wd/hub";
-		//System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "//drivers//chromedriver.exe");
-		//base.driver = new ChromeDriver();
-		base.driver = new RemoteWebDriver(new URL(completeUrl), dc);
+		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "//drivers//chromedriver.exe");
+		base.driver = new ChromeDriver();
+		//base.driver = new RemoteWebDriver(new URL(completeUrl), dc);
 	}
 
-	@After
+	@After("not @ParameterType")
 	public void quitDriver() {
 		System.out.println("---------------@After---------");
 		base.driver.quit();

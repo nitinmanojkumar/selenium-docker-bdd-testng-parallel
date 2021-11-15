@@ -3,11 +3,20 @@ package com.test.stepdefs;
 import java.util.List;
 import java.util.Map;
 
+import baseAndHooks.BaseClass;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class DataTables {
+public class DataTables extends BaseClass{
+
+	
+	private BaseClass base;
+
+	public DataTables(BaseClass base) {
+		System.out.println("SearchSteps args constructor");
+		this.base = base;
+	}
 
 	@Given("User is on Home Page")
 	public void user_is_on_home_page() {
@@ -36,6 +45,14 @@ public class DataTables {
 	@Then("I should be logged in {string} as dummyUser")
 	public void i_should_be_logged_in_as_dummy_user(String string) {
 	    System.out.println("Inline argument from feature file is : "+string);
+	}
+	
+	@Then("verify if the userNM, PWD is correct")
+	public void verify_if_the_user_nm_pwd_is_correct() {
+		System.out.println(base.map.get("UserName"));
+		System.out.println(base.map.get("Password"));
+		System.out.println(base.map.get("VerifyText"));
+		System.out.println(base.map.get("Integer"));
 	}
 	
 }
